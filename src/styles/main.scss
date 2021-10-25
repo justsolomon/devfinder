@@ -9,6 +9,7 @@ html {
 body {
   font-family: $font-family;
   color: $primary-color;
+  background-color: $homepage-bg;
   font-size: $font-size--base;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -20,4 +21,12 @@ img {
 
 a {
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  cursor: pointer;
 }

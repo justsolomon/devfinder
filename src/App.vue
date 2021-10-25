@@ -1,22 +1,50 @@
-<template>Hello World</template>
+<template>
+  <Header />
+  <SearchInput />
+  <ProfileCard />
+</template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Header from "./components/Header.vue";
+import SearchInput from "./components/SearchInput.vue";
+import ProfileCard from "./components/ProfileCard.vue";
+import "./styles/main.scss";
 
 export default defineComponent({
   name: "App",
-  components: {},
+  components: {
+    Header,
+    SearchInput,
+    ProfileCard,
+  },
 });
 </script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: $secondary-color;
-  font-weight: $font-weight--bold;
-  margin-top: 60px;
+  width: 45%;
+  margin: 50px auto;
+
+  @media #{$media-desktop} {
+    width: 50%;
+  }
+
+  @media #{$media-desktop-sm} {
+    width: 60%;
+  }
+
+  @media #{$media-tablet} {
+    width: 70%;
+  }
+
+  @media #{$media-mobile} {
+    width: 80%;
+  }
+
+  @media #{$media-mobile-sm} {
+    width: 90%;
+    margin: 30px auto;
+  }
 }
 </style>
