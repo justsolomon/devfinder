@@ -9,6 +9,7 @@
     "format": "prettier --config .prettierrc src --write"
   },
   "dependencies": {
+    "axios": "^0.23.0",
     "core-js": "^3.6.5",
     "vue": "^3.0.0"
   },
@@ -49,18 +50,7 @@
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
     },
-    "rules": {
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": false,
-          "jsxSingleQuote": false,
-          "trailingComma": "all",
-          "arrowParens": "always",
-          "endOfLine": "auto"
-        }
-      ]
-    }
+    "rules": {}
   },
   "browserslist": [
     "> 1%",

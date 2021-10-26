@@ -1,39 +1,44 @@
 <template>
   <div class="profile-card">
     <div class="profile-card__details">
-      <img
-        class="profile-card__image"
-        src="https://avatars.githubusercontent.com/u/55158465?v=4"
-      />
+      <img class="profile-card__image" :src="profile.avatar_url" />
       <div class="profile-card__user-info">
         <div class="profile-card__name">
-          <h2 class="profile-card__full-name">Gbolahan Balogun</h2>
+          <h2 class="profile-card__full-name">{{ profile.name }}</h2>
           <a
-            href="https://github.com"
+            :href="`https://github.com/${profile.login}`"
             target="_blank"
             rel="noopenner noreferrer"
             class="profile-card__username"
-            >@justsolomon</a
+            >@{{ profile.login }}</a
           >
         </div>
-        <div class="profile-card__date">Joined 11 Oct 2019</div>
+        <div class="profile-card__date">
+          Joined {{ new Date(profile.created_at).toLocaleDateString() }}
+        </div>
       </div>
     </div>
 
-    <p class="profile-card__bio">Building cool stuff for the web</p>
+    <p class="profile-card__bio">{{ profile.bio }}</p>
 
     <div class="profile-card__stats">
       <div class="profile-card__stats__section">
         <h3 class="profile-card__stats__section__title">Repos</h3>
-        <p class="profile-card__stats__section__value">44</p>
+        <p class="profile-card__stats__section__value">
+          {{ profile.public_repos }}
+        </p>
       </div>
       <div class="profile-card__stats__section">
         <h3 class="profile-card__stats__section__title">Followers</h3>
-        <p class="profile-card__stats__section__value">26</p>
+        <p class="profile-card__stats__section__value">
+          {{ profile.followers }}
+        </p>
       </div>
       <div class="profile-card__stats__section">
         <h3 class="profile-card__stats__section__title">Following</h3>
-        <p class="profile-card__stats__section__value">32</p>
+        <p class="profile-card__stats__section__value">
+          {{ profile.following }}
+        </p>
       </div>
     </div>
 
@@ -41,7 +46,8 @@
       <div
         :class="[
           'profile-card__personal-details__section',
-          !value && 'profile-card__personal-detils__section--inactive',
+          !profile.location &&
+            'profile-card__personal-details__section--inactive',
         ]"
       >
         <svg
@@ -60,13 +66,14 @@
           ></path>
         </svg>
         <p class="profile-card__personal-details__section__value">
-          Lagos, Nigeria
+          {{ profile.location || "Not available" }}
         </p>
       </div>
       <div
         :class="[
           'profile-card__personal-details__section',
-          !value && 'profile-card__personal-detils__section--inactive',
+          !profile.twitter_username &&
+            'profile-card__personal-details__section--inactive',
         ]"
       >
         <svg
@@ -84,18 +91,22 @@
           ></path>
         </svg>
         <a
-          href="https://twitter.com"
+          :href="`https://twitter.com/${profile.twitter_username}`"
           target="_blank"
           rel="noopenner noreferrer"
           class="profile-card__personal-details__section__value"
         >
-          @gbsolomon1
+          {{
+            profile.twitter_username
+              ? `@${profile.twitter_username}`
+              : "Not available"
+          }}
         </a>
       </div>
       <div
         :class="[
           'profile-card__personal-details__section',
-          !value && 'profile-card__personal-detils__section--inactive',
+          !profile.blog && 'profile-card__personal-details__section--inactive',
         ]"
       >
         <svg
@@ -112,12 +123,20 @@
             d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
           ></path>
         </svg>
-        <p class="profile-card__personal-details__section__value">haq</p>
+        <a
+          :href="profile.blog"
+          target="_blank"
+          rel="noopenner noreferrer"
+          class="profile-card__personal-details__section__value"
+        >
+          {{ profile.blog || "Not available" }}
+        </a>
       </div>
       <div
         :class="[
           'profile-card__personal-details__section',
-          !value && 'profile-card__personal-detils__section--inactive',
+          !profile.company &&
+            'profile-card__personal-details__section--inactive',
         ]"
       >
         <svg
@@ -133,17 +152,36 @@
             d="M1.5 14.25c0 .138.112.25.25.25H4v-1.25a.75.75 0 01.75-.75h2.5a.75.75 0 01.75.75v1.25h2.25a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25h-8.5a.25.25 0 00-.25.25v12.5zM1.75 16A1.75 1.75 0 010 14.25V1.75C0 .784.784 0 1.75 0h8.5C11.216 0 12 .784 12 1.75v12.5c0 .085-.006.168-.018.25h2.268a.25.25 0 00.25-.25V8.285a.25.25 0 00-.111-.208l-1.055-.703a.75.75 0 11.832-1.248l1.055.703c.487.325.779.871.779 1.456v5.965A1.75 1.75 0 0114.25 16h-3.5a.75.75 0 01-.197-.026c-.099.017-.2.026-.303.026h-3a.75.75 0 01-.75-.75V14h-1v1.25a.75.75 0 01-.75.75h-3zM3 3.75A.75.75 0 013.75 3h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 3.75zM3.75 6a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM3 9.75A.75.75 0 013.75 9h.5a.75.75 0 010 1.5h-.5A.75.75 0 013 9.75zM7.75 9a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5zM7 6.75A.75.75 0 017.75 6h.5a.75.75 0 010 1.5h-.5A.75.75 0 017 6.75zM7.75 3a.75.75 0 000 1.5h.5a.75.75 0 000-1.5h-.5z"
           ></path>
         </svg>
-        <p class="profile-card__personal-details__section__value">@qucoon</p>
+        <p class="profile-card__personal-details__section__value">
+          {{ profile.company ? `@${profile.company}` : "Not available" }}
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "ProfileCard",
+  props: {
+    profile: {
+      type: Object as PropType<{
+        name: String;
+        login: String;
+        avatar_url: String;
+        created_at: String;
+        public_repos: Number;
+        followers: Number;
+        following: Number;
+        blog: String;
+        twitter_username: String;
+        company: String;
+        location: String;
+      }>,
+    },
+  },
 });
 </script>
 
@@ -219,23 +257,32 @@ export default defineComponent({
 
   &__personal-details {
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
 
     &__section {
-      width: 50%;
+      width: 45%;
       margin-bottom: 16px;
       display: flex;
       align-items: center;
       color: $primary-color;
 
+      &--inactive,
+      &--inactive &__value {
+        color: $secondary-color;
+        pointer-events: none;
+      }
+
       &__icon {
         height: 18px;
-        width: 18px;
+        width: 10%;
         margin-right: 8px;
       }
 
       &__value {
+        width: 85%;
         color: $primary-color;
+        word-wrap: break-word;
       }
     }
   }
