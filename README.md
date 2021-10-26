@@ -1,24 +1,5 @@
-# hello-world
+# devfinder
 
-## Project setup
-```
-yarn install
-```
+A web app for finding a GitHub user's info
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+**Live URL**: [https://devfinder-app.netlify.app/](https://devfinder-app.netlify.app/)
