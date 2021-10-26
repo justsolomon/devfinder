@@ -19,17 +19,31 @@
     <input
       class="input-container__input"
       placeholder="Search GitHub username..."
+      :value="username"
+      @input="updateUsername"
     />
 
-    <button class="input-container__button">Search</button>
+    <button class="input-container__button" @click="fetchProfile">
+      Search
+    </button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "SearchInput",
+  props: {
+    username: String,
+    loading: Boolean,
+    updateUsername: {
+      type: Function as PropType<() => void>,
+    },
+    fetchProfile: {
+      type: Function as PropType<() => void>,
+    },
+  },
 });
 </script>
 
